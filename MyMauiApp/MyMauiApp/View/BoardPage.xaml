@@ -5,12 +5,7 @@
              x:Class="MyMauiApp.View.BoardPage"             
              x:DataType="local:BoardViewModel"
              Title="Board">
-    <VerticalStackLayout>
+    <StackLayout>
         
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-    </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>

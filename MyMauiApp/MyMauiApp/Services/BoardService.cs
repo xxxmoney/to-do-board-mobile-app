@@ -13,9 +13,29 @@ namespace MyMauiApp.Services
     /// </summary>
     public interface IBoardService
     {
+        /// <summary>
+        /// Gets all boards.
+        /// </summary>
+        /// <returns></returns>
         Task<List<Board>> GetBoardsAsync();
+        /// <summary>
+        /// Gets a board by its Id.
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
         Task<Board> GetBoardAsync(Guid guid);
+        /// <summary>
+        /// Updates or inserts a board.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         Task<Board> UpsertBoardAsync(Board board);
+        /// <summary>
+        /// Deletes a board.
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        Task DeleteBoardAsync(Guid guid);
     }
 
     public class BoardService : IBoardService
@@ -56,6 +76,21 @@ namespace MyMauiApp.Services
             Preferences.Set(KEY, json);
 
             return board;
+        }
+
+        public async Task DeleteBoardAsync(Guid guid)
+        {
+            var boards = await this.GetBoardsAsync();
+
+            // If there is a board with the same guid, update it.
+            var existingBoard = boards.FirstOrDefault(b => b.Guid == guid);
+            if (existingBoard != null)
+            {
+                boards.Remove(existingBoard);
+            }
+
+            string json = JsonConvert.SerializeObject(boards);
+            Preferences.Set(KEY, json);
         }
     }
 }

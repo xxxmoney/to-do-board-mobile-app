@@ -9,7 +9,7 @@
              x:Name="Boards">
 
     <StackLayout>
-        <ListView ItemsSource="{Binding Boards}" SelectionMode="None">
+        <ListView ItemsSource="{Binding Boards}" ItemSelected="ListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Board">
                     <ViewCell>

@@ -9,6 +9,6 @@ namespace MyMauiApp.Models
     public class Group
     {
         public string Name { get; set; }
-        public IEnumerable<Item> Items { get; set; }
+        public List<Item> Items { get; set; }
     }
 }

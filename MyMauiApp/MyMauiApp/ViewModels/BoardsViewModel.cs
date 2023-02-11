@@ -44,17 +44,17 @@ namespace MyMauiApp.ViewModels
             this.Boards.AddRange(boards);
         }
 
-        private async Task EditBoardAsync(Board board)
+        public async Task EditBoardAsync(Board board)
         {
             await Shell.Current.GoToAsync($"{nameof(UpsertBoardPage)}?guid={board.Guid.ToString("N")}");
         }
 
-        private async Task AddBoardAsync()
+        public async Task AddBoardAsync()
         {
             await Shell.Current.GoToAsync(nameof(UpsertBoardPage));
         }
 
-        private async Task ExploreBoardAsync(Board board)
+        public async Task ExploreBoardAsync(Board board)
         {
             await Shell.Current.GoToAsync($"{nameof(BoardPage)}?guid={board.Guid.ToString("N")}");
         }
