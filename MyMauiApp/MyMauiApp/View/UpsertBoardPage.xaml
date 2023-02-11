@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyMauiApp.ViewModels"
+             x:Class="MyMauiApp.View.UpsertBoardPage"
+             x:DataType="local:UpsertBoardViewModel"
+             Title="UpsertBoardPage">
+
+    <StackLayout>
+        <Label Text="Board Name:" />
+        <Entry Text="{Binding Board.Name}" Placeholder="Enter board name" />
+
+        <Label Text="Board Description:" />
+        <Entry Text="{Binding Board.Description}" Placeholder="Enter board description" />
+
+        <Button Text="Save" Command="{Binding SaveCommand}" />
+    </StackLayout>
+</ContentPage>
