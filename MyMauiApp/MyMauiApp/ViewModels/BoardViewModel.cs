@@ -76,7 +76,7 @@ namespace MyMauiApp.ViewModels
 
         private async Task EditAsync()
         {
-            await Shell.Current.GoToAsync($"upsert?Guid={this.Board.Guid}");
+            await Shell.Current.GoToAsync($"/upsert?Guid={this.Board.Guid}");
         }
 
         private Task SaveAsync()
