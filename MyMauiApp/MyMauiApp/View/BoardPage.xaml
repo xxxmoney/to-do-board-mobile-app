@@ -18,42 +18,43 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Group">
                     <ViewCell>
-                        <Grid RowDefinitions="45, 100" Padding="10" RowSpacing="15">
-                            <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="0">
-                                <StackLayout.GestureRecognizers>
-                                    <DropGestureRecognizer AllowDrop="True" Drop="ItemMove_Dropped" />
-                                </StackLayout.GestureRecognizers>
+                        <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                            <Grid RowDefinitions="45, 100" Padding="10" RowSpacing="15">
+                                <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="0">
+                                    <StackLayout.GestureRecognizers>
+                                        <DropGestureRecognizer AllowDrop="True" Drop="ItemMove_Dropped" />
+                                    </StackLayout.GestureRecognizers>
 
-                                <Entry Text="{Binding Name}" VerticalTextAlignment="Center" />
-                                <Button Text="Add Item" Clicked="ButtonAddGroup_Clicked" />
-                                <Button Text="Remove" Clicked="ButtonRemoveGroup_Clicked" Background="Red" TextColor="White" />
-                            </StackLayout>
+                                    <Entry Text="{Binding Name}" VerticalTextAlignment="Center" />
+                                    <Button Text="Add Item" Clicked="ButtonAddGroup_Clicked" />
+                                    <Button Text="Remove" Clicked="ButtonRemoveGroup_Clicked" Background="Red" TextColor="White" />
+                                </StackLayout>
 
-                            <StackLayout Grid.Row="1">
-                                <ListView 
-                                        ItemsSource="{Binding Items}"
-                                        x:Name="ItemListView"
-                                        SelectionMode="None">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:Item">
-                                            <ViewCell>
-                                                <Frame Padding="2">
-                                                    <Frame.GestureRecognizers>
-                                                        <DragGestureRecognizer CanDrag="true" DragStarting="ItemMove_DragStarting" />
-                                                    </Frame.GestureRecognizers>
+                                <StackLayout Grid.Row="1">
+                                    <ListView 
+                                            ItemsSource="{Binding Items}"
+                                            x:Name="ItemListView"
+                                            SelectionMode="None">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Item">
+                                                <ViewCell>
+                                                    <Frame Padding="2">
+                                                        <Frame.GestureRecognizers>
+                                                            <DragGestureRecognizer CanDrag="true" DragStarting="ItemMove_DragStarting" />
+                                                        </Frame.GestureRecognizers>
 
-                                                    <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
-                                                        <Entry Text="{Binding Text}" />
-                                                        <Button Text="Remove" Clicked="RemoveItem_Clicked" Background="Red" TextColor="White" />
-                                                    </StackLayout>
-                                                </Frame>
-                                            </ViewCell>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                                <!--<Button Text="Add" Grid.Row="1" Command="{Binding BindingContext.AddItemCommand, Source={x:Reference GroupListView}}" CommandParameter="{Binding .}" />-->
-                            </StackLayout>
-                        </Grid>
+                                                        <StackLayout Orientation="Horizontal" Padding="2" Spacing="10">
+                                                            <Entry Text="{Binding Text}" />
+                                                            <Button Text="Remove" Clicked="RemoveItem_Clicked" Background="Red" TextColor="White" />
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackLayout>
+                            </Grid>
+                        </ScrollView>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
