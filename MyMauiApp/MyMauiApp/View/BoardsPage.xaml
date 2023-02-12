@@ -8,7 +8,7 @@
              Title="Boards"
              x:Name="Boards">
 
-    <StackLayout>
+    <StackLayout Margin="10">
         <ListView ItemsSource="{Binding Boards}" ItemSelected="ListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Board">

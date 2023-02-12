@@ -13,7 +13,6 @@ using System.Windows.Input;
 
 namespace MyMauiApp.ViewModels
 {
-    [QueryProperty(nameof(Guid), nameof(Guid))]
     public partial class BoardsViewModel : ObservableObject
     {
         private readonly IBoardService boardService;
@@ -23,9 +22,6 @@ namespace MyMauiApp.ViewModels
         public ICommand EditCommand { get; }
         public ICommand AddCommand { get; }
         public ICommand ExploreCommand { get; }
-
-        [ObservableProperty]
-        string guid;
 
         public BoardsViewModel(IBoardService boardService)
         {
@@ -46,7 +42,7 @@ namespace MyMauiApp.ViewModels
 
         public async Task EditBoardAsync(Board board)
         {
-            await Shell.Current.GoToAsync($"{nameof(UpsertBoardPage)}?guid={board.Guid.ToString("N")}");
+            await Shell.Current.GoToAsync($"{nameof(UpsertBoardPage)}?Guid={board.Guid.ToString("N")}");
         }
 
         public async Task AddBoardAsync()
@@ -56,7 +52,7 @@ namespace MyMauiApp.ViewModels
 
         public async Task ExploreBoardAsync(Board board)
         {
-            await Shell.Current.GoToAsync($"{nameof(BoardPage)}?guid={board.Guid.ToString("N")}");
+            await Shell.Current.GoToAsync($"{nameof(BoardPage)}?Guid={board.Guid.ToString("N")}");
         }
 
 

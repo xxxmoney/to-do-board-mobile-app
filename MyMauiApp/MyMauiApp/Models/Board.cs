@@ -11,6 +11,6 @@ namespace MyMauiApp.Models
         public Guid Guid { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Group> Groups { get; set; }
+        public MvvmHelpers.ObservableRangeCollection<Group> Groups { get; set; }
     }
 }

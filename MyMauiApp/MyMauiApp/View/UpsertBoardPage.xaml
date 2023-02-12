@@ -6,7 +6,7 @@
              x:DataType="local:UpsertBoardViewModel"
              Title="UpsertBoardPage">
 
-    <StackLayout>
+    <StackLayout Margin="10" Spacing="15">
         <Label Text="Board Name:" />
         <Entry Text="{Binding Board.Name}" Placeholder="Enter board name" />
 
@@ -14,5 +14,6 @@
         <Entry Text="{Binding Board.Description}" Placeholder="Enter board description" />
 
         <Button Text="Save" Command="{Binding SaveCommand}" />
+        <Button Text="Delete" Command="{Binding DeleteCommand}" Margin="0, 40" Background="Red" TextColor="White" IsVisible="{Binding IsDeleteVisible}" />
     </StackLayout>
 </ContentPage>

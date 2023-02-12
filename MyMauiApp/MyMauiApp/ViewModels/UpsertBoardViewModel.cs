@@ -25,20 +25,32 @@ namespace MyMauiApp.ViewModels
         [ObservableProperty]
         string guid;
 
+        [ObservableProperty]
+        bool isDeleteVisible;
+
         public ICommand SaveCommand { get; }
+        public ICommand DeleteCommand { get; }
 
         public UpsertBoardViewModel(IBoardService boardService)
         {
             this.boardService = boardService;
 
-            this.SaveCommand = new AsyncRelayCommand(this.SaveBoardAsync);
+            this.SaveCommand = new AsyncRelayCommand(this.SaveAsync);
+            this.DeleteCommand = new AsyncRelayCommand(this.DeleteAsync);
         }
 
-        private async Task SaveBoardAsync()
+        private async Task SaveAsync()
         {
             await this.boardService.UpsertBoardAsync(this.Board);
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync(nameof(BoardsPage));
+        }
+
+        private async Task DeleteAsync()
+        {
+            await this.boardService.DeleteBoardAsync(this.Board.Guid);
+
+            await Shell.Current.GoToAsync(nameof(BoardsPage));
         }
 
         public async Task LoadBoardAsync()
@@ -46,10 +58,12 @@ namespace MyMauiApp.ViewModels
             if (!string.IsNullOrWhiteSpace(this.Guid))
             {
                 this.Board = await this.boardService.GetBoardAsync(System.Guid.Parse(this.Guid));
+                this.IsDeleteVisible = true;
             }
             else
             {
-                this.Board = new Board { Guid = System.Guid.NewGuid(), Groups = new List<Group>() };
+                this.Board = new Board { Guid = System.Guid.NewGuid(), Groups = new MvvmHelpers.ObservableRangeCollection<Group>() };
+                this.IsDeleteVisible = false;
             }
         }
     }

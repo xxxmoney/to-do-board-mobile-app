@@ -9,6 +9,6 @@ namespace MyMauiApp.Models
     public class Group
     {
         public string Name { get; set; }
-        public List<Item> Items { get; set; }
+        public MvvmHelpers.ObservableRangeCollection<Item> Items { get; set; }
     }
 }
