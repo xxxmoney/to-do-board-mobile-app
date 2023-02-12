@@ -27,33 +27,22 @@ namespace MyMauiApp.ViewModels
         {
             this.boardService = boardService;
 
-            this.MoveItemCommand = new RelayCommand<(Item, Group, Group)>(this.MoveItem);
             this.SaveCommand = new AsyncRelayCommand(this.SaveAsync);
-            this.AddItemCommand = new RelayCommand<Group>(AddItem);
             this.EditCommand = new AsyncRelayCommand(this.EditAsync);
             this.AddGroupCommand = new RelayCommand(this.AddGroup);
         }
         
-        public ICommand MoveItemCommand { get; set; }
-        public ICommand AddItemCommand { get; set; }
         public ICommand AddGroupCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         
-        private void MoveItem((Item, Group, Group) args)
+        public void MoveItem(Item item, Group oldGroup, Group newGroup)
         {
-            var item = args.Item1;
-            var sourceGroup = args.Item2;
-            var targetGroup = args.Item3;
-
-            if (sourceGroup == null || item == null || targetGroup == null)
-                return;
-
-            sourceGroup.Items.Remove(item);
-            targetGroup.Items.Add(item);
+            oldGroup.Items.Remove(item);
+            newGroup.Items.Add(item);
         }
         
-        private void AddItem(Group group)
+        public void AddItem(Group group)
         {
             var item = new Item { Text = "New Item" };
             group.Items.Add(item);
@@ -63,6 +52,12 @@ namespace MyMauiApp.ViewModels
         {
             var group = new Group { Name = "New Group", Items = new MvvmHelpers.ObservableRangeCollection<Item>() };
             this.Board.Groups.Add(group);
+        }
+
+        public void RemoveGroup(Group group)
+        {
+            // Removes the group from the board.
+            this.Board.Groups.Remove(group);                        
         }
 
         public async Task LoadAsync()
