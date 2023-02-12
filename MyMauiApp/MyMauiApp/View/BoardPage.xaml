@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyMauiApp.View.BoardPage"
-             Title="BoardPage">
-    <VerticalStackLayout>
-        
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-    </VerticalStackLayout>
+             xmlns:local="clr-namespace:MyMauiApp.ViewModels"
+             xmlns:models="clr-namespace:MyMauiApp.Models"
+             x:Class="MyMauiApp.View.BoardPage"             
+             x:DataType="local:BoardViewModel"
+             Title="Board">
+    <StackLayout Margin="10">
+        <StackLayout Margin="0,0,0,25">
+            <Label Text="{Binding Board.Name}" FontSize="Header" HorizontalOptions="Center" Padding="5" />
+            <Label Text="{Binding Board.Description}" HorizontalOptions="Center" Padding="2" />
+        </StackLayout>
+        <ListView 
+            ItemsSource="{Binding Board.Groups}"
+            x:Name="GroupsListView"
+            SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Group">
+                    <ViewCell>
+                        <Grid RowDefinitions="45, 100" Padding="10" RowSpacing="15">
+                            <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="0">
+                                <Entry Text="{Binding Name}" VerticalTextAlignment="Center" />
+                                <Button Text="Add Item" Clicked="ButtonAddGroup_Clicked" />
+                                <Button Text="Remove" Clicked="ButtonRemoveGroup_Clicked" Background="Red" TextColor="White" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="1">
+                                <ListView 
+                                    ItemsSource="{Binding Items}"
+                                    x:Name="ItemListView"
+                                    SelectionMode="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Item">
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
+                                                    <Entry Text="{Binding Text}" />
+                                                    <Button Text="Remove" Clicked="RemoveItem_Clicked" Background="Red" TextColor="White" />
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                    <!--<Button Text="Add" Grid.Row="1" Command="{Binding BindingContext.AddItemCommand, Source={x:Reference GroupListView}}" CommandParameter="{Binding .}" />-->
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid ColumnSpacing="5" RowDefinitions="*" ColumnDefinitions="*, *, *">
+            <Button Text="Add Group" Command="{Binding AddGroupCommand}" Grid.Column="0" />
+            <Button Text="Edit" Command="{Binding EditCommand}" Grid.Column="1" />
+            <Button Text="Save" Command="{Binding SaveCommand}" Grid.Column="2" />
+        </Grid>
+    </StackLayout>
 </ContentPage>
