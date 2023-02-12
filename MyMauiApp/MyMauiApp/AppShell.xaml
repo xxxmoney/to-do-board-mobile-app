@@ -9,11 +9,11 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="main" />
 
     <ShellContent
         Title="Boards"
         ContentTemplate="{DataTemplate local:BoardsPage}"
-        Route="BoardsPage" />
+        Route="boards" />
 
 </Shell>

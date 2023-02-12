@@ -56,18 +56,27 @@ namespace MyMauiApp.ViewModels
 
         public void RemoveGroup(Group group)
         {
-            // Removes the group from the board.
-            this.Board.Groups.Remove(group);                        
+            this.Board.Groups.Remove(group);
         }
 
         public async Task LoadAsync()
         {
             this.Board = await this.boardService.GetBoardAsync(System.Guid.Parse(this.Guid));
+            if (this.Board == null)
+            {
+                Shell.Current.Navigated += Navigated;
+            }
+        }
+
+        private void Navigated(object sender, ShellNavigatedEventArgs e)
+        {
+            Shell.Current.Navigated -= Navigated;
+            Shell.Current.GoToAsync("..");
         }
 
         private async Task EditAsync()
         {
-            await Shell.Current.GoToAsync($"{nameof(UpsertBoardPage)}?Guid={this.Board.Guid}");
+            await Shell.Current.GoToAsync($"upsert?Guid={this.Board.Guid}");
         }
 
         private Task SaveAsync()

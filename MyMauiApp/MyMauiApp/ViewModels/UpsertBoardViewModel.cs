@@ -43,14 +43,14 @@ namespace MyMauiApp.ViewModels
         {
             await this.boardService.UpsertBoardAsync(this.Board);
 
-            await Shell.Current.GoToAsync(nameof(BoardsPage));
+            await Shell.Current.GoToAsync("..");
         }
 
         private async Task DeleteAsync()
         {
             await this.boardService.DeleteBoardAsync(this.Board.Guid);
 
-            await Shell.Current.GoToAsync(nameof(BoardsPage));
+            await Shell.Current.GoToAsync("..");
         }
 
         public async Task LoadBoardAsync()

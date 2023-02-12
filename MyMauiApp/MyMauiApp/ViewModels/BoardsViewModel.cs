@@ -42,17 +42,17 @@ namespace MyMauiApp.ViewModels
 
         public async Task EditBoardAsync(Board board)
         {
-            await Shell.Current.GoToAsync($"{nameof(UpsertBoardPage)}?Guid={board.Guid.ToString("N")}");
+            await Shell.Current.GoToAsync($"upsert?Guid={board.Guid.ToString("N")}");
         }
 
         public async Task AddBoardAsync()
         {
-            await Shell.Current.GoToAsync(nameof(UpsertBoardPage));
+            await Shell.Current.GoToAsync("boards");
         }
 
         public async Task ExploreBoardAsync(Board board)
         {
-            await Shell.Current.GoToAsync($"{nameof(BoardPage)}?Guid={board.Guid.ToString("N")}");
+            await Shell.Current.GoToAsync($"board?Guid={board.Guid.ToString("N")}");
         }
 
 
